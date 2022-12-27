@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  class Mobile{
+    constructor(name) {
+      this.name=name
+      this.battery=100
+      this.status=false
+      this.inbox=[]
+      this.sentMsg=[]
+    }
+    checkStatus(){
+      if (this.status){
+        alert(name+" is currently on")
+      }else{
+        alert(name+" is currently off")
+      }
+      alert("you have"+this.battery+"point in battery")
+    }
+    On(){
+      this.status=true
+    }
+    Off(){
+      this.status=false
+    }
+    Charge(){
+      this.battery=100
+    }
+    sendMsg(content,target) {
+      if (this.battery != 0 && this.status) {
+        this.sentMsg.push(content)
+        this.battery--
+        target.inbox.push(content)
+        target.battery--
+      }
+    }
+    inBox(){
+      if (this.battery != 0 && this.status) {
+        document.write("<br>"+this.name+" inbox is"+"<br>"+this.inbox.join("<br>"))
+        this.battery--
+      }
+    }
+    sent(){
+      if (this.battery != 0 && this.status) {
+        document.write("<br>"+this.name+" sent is"+"<br>"+this.sentMsg.join("<br>"))
+        this.battery--
+      }
+    }
+  }
+  let nokia=new Mobile("Nokia")
+  let apple=new Mobile("Apple")
+  nokia.On()
+  apple.On()
+  nokia.sendMsg("hellothere?",apple)
+  nokia.sent()
+  nokia.sendMsg("hellothere1",nokia)
+  nokia.sendMsg("hellothere2",apple)
+  nokia.sent()
+  apple.inBox()
+  nokia.checkStatus()
+
+</script>
+
+</html>
